@@ -1,0 +1,58 @@
+<div class="container">
+  <h1>{{title}}</h1>
+
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label for="productName" class="col-sm-2">Product Name</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="productName" name="productName" 
+        [(ngModel)]="modal.productName" placeholder="Enter product name" type="text">
+      </div>
+    </div>    
+    
+    <div class="form-group">
+      <label class="col-sm-2" for="productDescription">Product Description</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="productDescription" name="productDescription" 
+        [(ngModel)]="modal.productDescription" placeholder="Enter product description" 
+        type="text">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2" for="productimage">Product Image</label>
+      <div class="col-sm-10">
+         <input type="file" name="productImage" [(ngModel)]="modal.productImage">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2">
+        <button type="submit" class="btn btn-primary" (click)="addProduct()" 
+        [disabled]="isForUpdate == true">Add</button>
+        <button type="submit" class="btn btn-primary" (click)="updateProduct()" 
+        [disabled]="isForUpdate == false">Update</button>
+      </div>
+    </div>
+  </form>
+
+  <h2>Read Data & (Delete Data)</h2>
+  <div>
+    <table class="table table-bordered">
+      <tr text-align="center">
+        <!-- <th>Product Id</th> -->
+        <th>Product Name</th>
+        <th>Product Description</th>
+        <th>Product Image</th>
+        <th colspan="2">Action</th>
+      </tr>
+      <tr *ngFor="let product of products; let i= index">
+        <!-- <td>{{ product.productId }}</td> -->
+        <td>{{ product.productName }}</td>
+        <td>{{ product.productDescription }}</td>
+        <td><img src="{{ product.productImage }}" width=25px; height="35px" padding="10px"></td>
+        <td><a class="btn btn-success" (click)="editProduct(i)">Edit</a></td>
+        <td><a class="btn btn-danger" (click)="deleteProduct(i)">Delete</a></td>
+    </table>
+  </div>
+</div>
